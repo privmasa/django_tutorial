@@ -20,3 +20,11 @@ class VoteForm(forms.Form):
     def __init__(self, question, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['choice'].queryset = question.choice_set.all()
+        self.fields[
+            'choice'].widget.renderer.inner_html = '{choice_value}{sub_widgets}<br>'
+
+    def vote(self):
+        assert(self.is_valid())
+        choice = self.cleaned_data['choice']
+        choice.votes += 1
+        choice.save()

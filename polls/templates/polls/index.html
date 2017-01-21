@@ -1,14 +1,12 @@
 <html>
 <body>
-
-{% if latest_question_list %}
 	<table border="1">
 		<tr>
 			<th>質問内容</th>
 			<th>公開日</th>
 			<th></th>
 		</tr>
-		{% for question in latest_question_list %}
+		{% for question in questions %}
 		<tr>
 			<td>{{ question.question }}</td>
 			<td>{{ question.pub_date }} </td>
@@ -16,9 +14,5 @@
 		</tr>
 		{% endfor %}
 	</table>
-{% else %}
-	<p>No polls are available.</p>
-{% endif %}
-
 </body>
 </html>
