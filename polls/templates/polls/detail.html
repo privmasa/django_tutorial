@@ -1,13 +1,13 @@
-<html>
-<body>
+{% extends "polls/base.html" %}
+{% load bootstrap3 %}
 
-	<h1>{{ question.question }}</h1>
-	<a href="{%url 'polls:index' %}">一覧画面へ</a>
+{% block contents %}
+<h1>{{ question.question }}</h1>
+<a href="{%url 'polls:index' %}">一覧画面へ</a>
 
-	<form action="" method="post">
-		{% csrf_token %}
-		{{ form }}
-		<input type="submit" value="Vote" />
-	</form>
-</body>
-</html>
+<form action="" method="post">
+	{% csrf_token %}
+	{% bootstrap_form form %}
+	<input type="submit" value="Vote" />
+</form>
+{% endblock contents %}

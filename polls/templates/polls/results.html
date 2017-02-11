@@ -1,6 +1,7 @@
-<html>
-	<body>
-		<h1>{{ question.question_text }}</h1>
+{% extends "polls/base.html" %}
+
+{% block contents %}
+		<h1>{{ question.question }}</h1>
 
 		<ul>
 			{% for choice in question.choice_set.all %}
@@ -8,5 +9,4 @@
 			{% endfor %}
 		</ul>
 		<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
-	</body>
-</html>
+{% endblock contents %}

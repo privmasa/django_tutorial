@@ -10,6 +10,7 @@ from django.http import Http404
 from django.views.generic import FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.core.urlresolvers import reverse_lazy
+from django.contrib import messages
 # from django.template import loader
 
 from .models import Question
@@ -80,7 +81,11 @@ class Detail(SingleObjectMixin, FormView):
         return kwargs
 
     def form_valid(self, form):
+        print('*********** views:form_valid')
         form.vote()
+        choice = form.cleaned_data['choice']
+        print(choice)
+        messages.success(self.request, '"%s"に投票しました' % choice)
         return super().form_valid(form)
 
     def get_success_url(self):
