@@ -17,7 +17,7 @@ class Question(models.Model):
 
     def was_published_recently(self):
         print('*********** class Qestion:def was_published_recently')
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        return timezone.now() >= self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
     was_published_recently.admin_oreder_field = 'pub_date'
     was_published_recently.boolean = True
