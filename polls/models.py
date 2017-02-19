@@ -5,11 +5,29 @@ import datetime
 # Create your models here.
 
 
+class QuestionQuerySet(models.query.QuerySet):
+
+    def is_published(self):
+        return self.filter(pub_date__lte=timezone.now())
+
+
 class Question(models.Model):
+
+    class Meta:
+        verbose_name = '質問'
+        verbose_name_plural = '質問の複数形'
+        ordering = ['-pub_date']
+
     question = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
 
     print('*********** class Qestion')
+
+    objects = models.Manager.from_queryset(QuestionQuerySet)()
+
+    @classmethod
+    def get_published_data(cls):
+        return cls.objects.is_published()
 
     def __str__(self):
         print('*********** class Qestion:def __str___')
